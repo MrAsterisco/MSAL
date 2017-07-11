@@ -337,32 +337,40 @@
                        environment:(NSString *)environment
                              error:(NSError * __autoreleasing *)error
 {
-    REQUIRED_PARAMETER(userIdentifier, nil);
-    REQUIRED_PARAMETER(clientId, nil);
-    REQUIRED_PARAMETER(environment, nil);
-    
-    MSALRefreshTokenCacheKey *key =
-    [[MSALRefreshTokenCacheKey alloc] initWithEnvironment:environment
-                                                 clientId:clientId
-                                           userIdentifier:userIdentifier];
-    
-    NSError *localError = nil;
-    MSALRefreshTokenCacheItem *rtItem =
-    [_dataSource getRefreshTokenItemForKey:key context:nil error:&localError];
-    if (!rtItem)
-    {
-        if (!localError)
-        {
-            MSAL_ERROR_PARAM(nil, MSALErrorUserNotFound, @"No user found matching userIdentifier");
-        }
-        else if (error)
-        {
-            *error = localError;
-        }
-        return nil;
-    }
-    
-    return rtItem.user;
+    return [self getRefreshTokenForUserIdentifier:userIdentifier clientId:clientId environment:environment error:error].user;
+}
+
+- (MSALRefreshTokenCacheItem *)getRefreshTokenForUserIdentifier:(NSString *)userIdentifier
+									  clientId:(NSString *)clientId
+								   environment:(NSString *)environment
+										 error:(NSError * __autoreleasing *)error
+{
+	REQUIRED_PARAMETER(userIdentifier, nil);
+	REQUIRED_PARAMETER(clientId, nil);
+	REQUIRED_PARAMETER(environment, nil);
+	
+	MSALRefreshTokenCacheKey *key =
+	[[MSALRefreshTokenCacheKey alloc] initWithEnvironment:environment
+												 clientId:clientId
+										   userIdentifier:userIdentifier];
+	
+	NSError *localError = nil;
+	MSALRefreshTokenCacheItem *rtItem =
+	[_dataSource getRefreshTokenItemForKey:key context:nil error:&localError];
+	if (!rtItem)
+	{
+		if (!localError)
+		{
+			MSAL_ERROR_PARAM(nil, MSALErrorUserNotFound, @"No user found matching userIdentifier");
+		}
+		else if (error)
+		{
+			*error = localError;
+		}
+		return nil;
+	}
+	
+	return rtItem;
 }
 
 - (NSArray<MSALAccessTokenCacheItem *> *)allAccessTokensForUser:(MSALUser *)user
