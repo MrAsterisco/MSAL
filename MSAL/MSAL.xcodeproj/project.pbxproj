@@ -1632,7 +1632,7 @@
 					};
 					D65A6F421E3FD30A00C69FBA = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = UBF8T346G9;
+						DevelopmentTeam = 98ASURPE63;
 						ProvisioningStyle = Automatic;
 					};
 					D65A6F4F1E3FD32D00C69FBA = {
@@ -2174,6 +2174,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 98ASURPE63;
 			};
 			name = Debug;
 		};
@@ -2183,6 +2184,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 98ASURPE63;
 			};
 			name = Release;
 		};

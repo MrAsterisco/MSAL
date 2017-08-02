@@ -176,9 +176,6 @@ static NSString *const s_kHttpHeaderDelimeter = @",";
     [event setHttpMethod:request.HTTPMethod];
     [event setHttpURL:newURL];
     
-    LOG_INFO(_context, @"HTTP request %@", [MSALAuthority isKnownHost:request.URL] ? request.URL.absoluteString : [request.URL.absoluteString msalShortSHA256Hex]);
-    LOG_INFO_PII(_context, @"HTTP request %@", request.URL.absoluteString);
-    
     NSURLSessionDataTask *task = [_session dataTaskWithRequest:request
                                              completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
