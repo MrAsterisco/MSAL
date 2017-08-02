@@ -128,6 +128,16 @@
                                        error:error];
 }
 
+- (NSString *)refreshTokenForUserIdentifier:(NSString *)identifier
+									  error:(NSError * __autoreleasing *)error
+{
+	return [_tokenCache getRefreshTokenForUserIdentifier:identifier
+												clientId:self.clientId
+											 environment:[self.authority host]
+												   error:error]
+																.refreshToken;
+}
+
 #pragma SafariViewController Support
 
 + (BOOL)handleMSALResponse:(NSURL *)response

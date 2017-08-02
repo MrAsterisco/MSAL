@@ -35,7 +35,7 @@
 #import "NSURL+MSALExtensions.h"
 #import "MSALAuthority.h"
 
-static uint64_t s_expirationBuffer = 300; //in seconds, ensures catching of clock differences between the server and the device
+static uint64_t s_expirationBuffer = 240; //in seconds, ensures catching of clock differences between the server and the device
 
 @implementation MSALAccessTokenCacheItem
 {

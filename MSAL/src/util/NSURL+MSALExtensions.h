@@ -31,4 +31,7 @@
 // Returns a path with any tenant info removed from it
 - (NSString *)scrubbedHttpPath;
 
+// Returns YES for equivalent authority
+- (BOOL)isEquivalentAuthority:(NSURL *)aURL;
+
 @end
