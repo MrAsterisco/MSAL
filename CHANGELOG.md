@@ -1,3 +1,15 @@
+## [1.0] - 2017-08-02
+### Added
+- It's now possible to get the refreshToken of a previously logged-in user.
+
+### Fixed
+- Fix incompatibility with Azure B2C authentication system.
+- Fix wrong handling of token cache for Azure B2C.
+
+----
+
+The following changelog refers to Microsoft versioning system:
+
 ## [0.1.1] - 2017-05-10
 ### Changed
 - MSAL for ObjC no longer targets test slice by default (#195)
