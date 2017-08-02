@@ -184,7 +184,9 @@
     REQUIRED_PARAMETER_BOOL(user, ctx);
     REQUIRED_PARAMETER_BOOL(outAccessToken, ctx);
     REQUIRED_PARAMETER_BOOL(outAuthorityFound, ctx);
-    
+	
+	scopes = scopes;
+	
     *outAccessToken = nil;
     *outAuthorityFound = nil;
     
@@ -222,12 +224,7 @@
             MSAL_ERROR_PARAM(ctx, MSALErrorAmbiguousAuthority, @"Found multiple access tokens, which token to return is ambiguous! Please pass in authority if not provided.");
             return NO;
         }
-        
-        if (![scopes isSubsetOfOrderedSet:tokenItem.scope])
-        {
-            continue;
-        }
-        
+		
         [matchedTokens addObject:tokenItem];
     }
     
