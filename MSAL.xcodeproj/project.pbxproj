@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -587,9 +587,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D65A6F421E3FD30A00C69FBA /* MSAL (iOS Framework) */ = {
+		D65A6F421E3FD30A00C69FBA /* MSAL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D65A6F481E3FD30A00C69FBA /* Build configuration list for PBXNativeTarget "MSAL (iOS Framework)" */;
+			buildConfigurationList = D65A6F481E3FD30A00C69FBA /* Build configuration list for PBXNativeTarget "MSAL" */;
 			buildPhases = (
 				D65A6F3E1E3FD30A00C69FBA /* Sources */,
 				D65A6F3F1E3FD30A00C69FBA /* Frameworks */,
@@ -600,7 +600,7 @@
 			);
 			dependencies = (
 			);
-			name = "MSAL (iOS Framework)";
+			name = MSAL;
 			productName = "MSAL (Framework)";
 			productReference = D65A6F431E3FD30A00C69FBA /* MSAL.framework */;
 			productType = "com.apple.product-type.framework";
@@ -622,7 +622,7 @@
 				};
 			};
 			buildConfigurationList = D6DFF39D1E2579360012891A /* Build configuration list for PBXProject "MSAL" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -634,7 +634,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D65A6F421E3FD30A00C69FBA /* MSAL (iOS Framework) */,
+				D65A6F421E3FD30A00C69FBA /* MSAL */,
 			);
 		};
 /* End PBXProject section */
@@ -768,7 +768,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D65A6F481E3FD30A00C69FBA /* Build configuration list for PBXNativeTarget "MSAL (iOS Framework)" */ = {
+		D65A6F481E3FD30A00C69FBA /* Build configuration list for PBXNativeTarget "MSAL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D65A6F491E3FD30A00C69FBA /* Debug */,
