@@ -12,14 +12,11 @@ The main reason why this fork is born is to fix the incompatibility between this
 
 You should not use this fork, unless you are looking for the following added features:
 
-* Real compatibility with Azure B2C authentication system: the original version provided by Microsoft is declared as compatible, but actually doesn't work.
 * Direct access to the _refreshToken_: even though this might sound as a security issue to someone, there are specific cases where this is needed.
 
 If you're still reading and you really want to use this fork, you should also bear in mind these few things:
 
 * This library **is not supported** neither by Microsoft or me. I do not provide any kind of assistance in using it and I do not guarantee that it will be kept in sync with any change to the Microsoft Cloud or the original library.
-* If you need to use multiple tokens with different scopes for the same user, **use the original library**, because this version doesn't do any kind of checks on the available scopes for each cached token. This means that, when gathering tokens from the cache, if more than one is present (even with different scopes), the library will throw an error.
-* This version has removed any kind of draft compatibility with macOS and doesn't offer Unit Tests or automatic building.
 
 ## Usage
 Keeping in mind all of the things that you should have read before **(if you didn't, please do)**, the preferred way to use this library is `Carthage`.
@@ -29,7 +26,7 @@ Keeping in mind all of the things that you should have read before **(if you did
 Just add the following to your `Cartfile`:
 
 ```
-github "MrAsterisco/microsoft-authentication-library-for-objc" "master"
+github "MrAsterisco/MSAL" "master"
 ```
 
 If you don't have `Carthage` in your project, refer to [this guide](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application) to learn how to install and configure it.
