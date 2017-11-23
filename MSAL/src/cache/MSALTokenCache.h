@@ -78,4 +78,9 @@
                        environment:(NSString *)environment
                              error:(NSError * __autoreleasing *)error;
 
+- (MSALRefreshTokenCacheItem *)getRefreshTokenForUserIdentifier:(NSString *)userIdentifier
+                                                       clientId:(NSString *)clientId
+                                                    environment:(NSString *)environment
+                                                          error:(NSError * __autoreleasing *)error;
+
 @end

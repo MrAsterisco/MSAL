@@ -104,6 +104,16 @@
 - (MSALUser *)userForIdentifier:(NSString *)identifier
                           error:(NSError * __autoreleasing *)error;
 
+/*!
+ Returns the internal refresh token associated to the user identifier given (received
+ from a user object returned in a previous acquireToken call)
+ 
+ @param  error   The error that occured trying to the user, if any, if you're
+ not interested in the specific error pass in nil.
+ */
+- (NSString *)refreshTokenForUserIdentifier:(NSString *)identifier
+                                      error:(NSError * __autoreleasing *)error;
+
 #pragma SafariViewController Support
 
 /*!

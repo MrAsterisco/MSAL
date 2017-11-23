@@ -337,6 +337,14 @@
                        environment:(NSString *)environment
                              error:(NSError * __autoreleasing *)error
 {
+    return [self getRefreshTokenForUserIdentifier:userIdentifier clientId:clientId environment:environment error:error].user;
+}
+
+- (MSALRefreshTokenCacheItem *)getRefreshTokenForUserIdentifier:(NSString *)userIdentifier
+                                                       clientId:(NSString *)clientId
+                                                    environment:(NSString *)environment
+                                                          error:(NSError * __autoreleasing *)error
+{
     REQUIRED_PARAMETER(userIdentifier, nil);
     REQUIRED_PARAMETER(clientId, nil);
     REQUIRED_PARAMETER(environment, nil);
@@ -362,7 +370,7 @@
         return nil;
     }
     
-    return rtItem.user;
+    return rtItem;
 }
 
 - (NSArray<MSALAccessTokenCacheItem *> *)allAccessTokensForUser:(MSALUser *)user
