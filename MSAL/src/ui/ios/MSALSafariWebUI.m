@@ -27,24 +27,23 @@
 
 #import <SafariServices/SafariServices.h>
 
-#import "MSALWebUI.h"
+#import "MSALSafariWebUI.h"
 #import "UIApplication+MSALExtensions.h"
 #import "MSALTelemetry.h"
 #import "MSALTelemetry+Internal.h"
 #import "MSALTelemetryUIEvent.h"
 #import "MSALTelemetryEventStrings.h"
 
-static MSALWebUI *s_currentWebSession = nil;
+static MSALSafariWebUI *s_currentWebSession = nil;
 
-@interface MSALWebUI () <SFSafariViewControllerDelegate>
+@interface MSALSafariWebUI () <SFSafariViewControllerDelegate>
 
 @end
 
-@implementation MSALWebUI
+@implementation MSALSafariWebUI
 {
     NSURL *_url;
     SFSafariViewController *_safariViewController;
-	id _safariAuthenticationSession;
     MSALWebUICompletionBlock _completionBlock;
     id<MSALRequestContext> _context;
     NSString *_telemetryRequestId;
@@ -57,15 +56,15 @@ static MSALWebUI *s_currentWebSession = nil;
 {
     CHECK_ERROR_COMPLETION(url, context, MSALErrorInternal, @"Attempted to start WebUI with nil URL");
     
-    MSALWebUI *webUI = [MSALWebUI new];
+    MSALSafariWebUI *webUI = [MSALSafariWebUI new];
     webUI->_context = context;
     [webUI startWithURL:url completionBlock:completionBlock];
 }
 
-+ (MSALWebUI *)getAndClearCurrentWebSession
++ (MSALSafariWebUI *)getAndClearCurrentWebSession
 {
-    MSALWebUI *webSession = nil;
-    @synchronized ([MSALWebUI class])
+    MSALSafariWebUI *webSession = nil;
+    @synchronized ([MSALSafariWebUI class])
     {
         webSession = s_currentWebSession;
         s_currentWebSession = nil;
@@ -76,7 +75,7 @@ static MSALWebUI *s_currentWebSession = nil;
 
 + (BOOL)cancelCurrentWebAuthSession
 {
-    MSALWebUI *webSession = [MSALWebUI getAndClearCurrentWebSession];
+    MSALSafariWebUI *webSession = [MSALSafariWebUI getAndClearCurrentWebSession];
     if (!webSession)
     {
         return NO;
@@ -87,7 +86,7 @@ static MSALWebUI *s_currentWebSession = nil;
 
 - (BOOL)clearCurrentWebSession
 {
-    @synchronized ([MSALWebUI class])
+    @synchronized ([MSALSafariWebUI class])
     {
         if (s_currentWebSession != self)
         {
@@ -124,7 +123,7 @@ static MSALWebUI *s_currentWebSession = nil;
 - (void)startWithURL:(NSURL *)url
      completionBlock:(MSALWebUICompletionBlock)completionBlock
 {
-    @synchronized ([MSALWebUI class])
+    @synchronized ([MSALSafariWebUI class])
     {
         CHECK_ERROR_COMPLETION((!s_currentWebSession), _context, MSALErrorInteractiveSessionAlreadyRunning, @"Only one interactive session is allowed at a time.");
         s_currentWebSession = self;
@@ -139,28 +138,19 @@ static MSALWebUI *s_currentWebSession = nil;
     [_telemetryEvent setIsCancelled:NO];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-		if (@available(iOS 11.0, *)) {
-			_safariAuthenticationSession = [[SFAuthenticationSession alloc] initWithURL:url callbackURLScheme:@"msal660e01b5-2336-478b-9a57-43c636a6b680" completionHandler:^(NSURL * _Nullable callbackURL, NSError * _Nullable error) {
-				NSLog(@"%@", callbackURL);
-				NSLog(@"%@", error);
-			}];
+		_safariViewController = [[SFSafariViewController alloc] initWithURL:url
+													entersReaderIfAvailable:NO];
+		_safariViewController.delegate = self;
 
-			[(SFAuthenticationSession*)_safariAuthenticationSession start];
-		} else {
-			_safariViewController = [[SFSafariViewController alloc] initWithURL:url
-														entersReaderIfAvailable:NO];
-			_safariViewController.delegate = self;
-
-			UIViewController *viewController = [UIApplication msalCurrentViewController];
-			if (!viewController)
-			{
-				[self clearCurrentWebSession];
-				ERROR_COMPLETION(_context, MSALErrorNoViewController, @"MSAL was unable to find the current view controller.");
-			}
-
-			[viewController presentViewController:_safariViewController animated:YES completion:nil];
+		UIViewController *viewController = [UIApplication msalCurrentViewController];
+		if (!viewController)
+		{
+			[self clearCurrentWebSession];
+			ERROR_COMPLETION(_context, MSALErrorNoViewController, @"MSAL was unable to find the current view controller.");
 		}
-        
+
+		[viewController presentViewController:_safariViewController animated:YES completion:nil];
+
         @synchronized (self)
         {
             _completionBlock = completionBlock;
@@ -176,7 +166,7 @@ static MSALWebUI *s_currentWebSession = nil;
         return NO;
     }
     
-    MSALWebUI *webSession = [MSALWebUI getAndClearCurrentWebSession];
+    MSALSafariWebUI *webSession = [MSALSafariWebUI getAndClearCurrentWebSession];
     if (!webSession)
     {
         LOG_ERROR(nil, @"Received MSAL web response without a current session running.");

@@ -30,7 +30,7 @@
 #import "MSALAuthority.h"
 #import "MSALOAuth2Constants.h"
 #import "MSALUIBehavior_Internal.h"
-#import "MSALWebUI.h"
+#import "MSALFullscreenWebUI.h"
 #import "MSALTelemetryApiId.h"
 
 #import "MSALPkce.h"
@@ -180,7 +180,7 @@ static MSALInteractiveRequest *s_currentRequest = nil;
     LOG_INFO_PII(_parameters, @"Launching Web UI with URL: %@", authorizationUrl);
     s_currentRequest = self;
     
-    [MSALWebUI startWebUIWithURL:authorizationUrl
+    [MSALFullscreenWebUI startWebUIWithURL:authorizationUrl
                          context:_parameters
                  completionBlock:^(NSURL *response, NSError *error)
      {

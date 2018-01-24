@@ -25,30 +25,9 @@
 //
 //------------------------------------------------------------------------------
 
+#import <Foundation/Foundation.h>
 #import "MSALWebUI.h"
 
-@implementation MSALWebUI
-
-+ (void)startWebUIWithURL:(NSURL *)url
-                  context:(id<MSALRequestContext>)context
-          completionBlock:(MSALWebUICompletionBlock)completionBlock
-{
-    (void)url;
-    (void)context;
-    (void)completionBlock;
-    
-    @throw @"MSAL is not supported on macOS at this time.";
-}
-
-+ (BOOL)handleResponse:(NSURL *)url
-{
-    (void)url;
-    @throw @"MSAL is not supported on macOS at this time.";
-}
-
-+ (BOOL)cancelCurrentWebAuthSession
-{
-    return NO;
-}
+@interface MSALSafariWebUI : NSObject<MSALWebUI>
 
 @end

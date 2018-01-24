@@ -38,7 +38,7 @@
 #import "MSALTestSwizzle.h"
 #import "MSALTestURLSession.h"
 #import "MSALUser.h"
-#import "MSALWebUI.h"
+#import "MSALSafariWebUI.h"
 #import "NSURL+MSALExtensions.h"
 #import "MSALTestConstants.h"
 
@@ -277,7 +277,7 @@
     
     // Swizzle out the main entry point for WebUI, WebUI is tested in its own component tests
     [MSALTestSwizzle classMethod:@selector(startWebUIWithURL:context:completionBlock:)
-                           class:[MSALWebUI class]
+                           class:[MSALSafariWebUI class]
                            block:(id)^(id obj, NSURL *url, id<MSALRequestContext>context, MSALWebUICompletionBlock completionBlock)
      {
          (void)obj;
@@ -435,7 +435,7 @@
     
     // Swizzle out the main entry point for WebUI, WebUI is tested in its own component tests
     [MSALTestSwizzle classMethod:@selector(startWebUIWithURL:context:completionBlock:)
-                           class:[MSALWebUI class]
+                           class:[MSALSafariWebUI class]
                            block:(id)^(id obj, NSURL *url, id<MSALRequestContext>context, MSALWebUICompletionBlock completionBlock)
      {
          (void)obj;
@@ -606,7 +606,7 @@
     
     // Swizzle out the main entry point for WebUI, WebUI is tested in its own component tests
     [MSALTestSwizzle classMethod:@selector(startWebUIWithURL:context:completionBlock:)
-                           class:[MSALWebUI class]
+                           class:[MSALSafariWebUI class]
                            block:(id)^(id obj, NSURL *url, id<MSALRequestContext>context, MSALWebUICompletionBlock completionBlock)
      {
          (void)obj;
@@ -753,7 +753,7 @@
     
     // Swizzle out the main entry point for WebUI, WebUI is tested in its own component tests
     [MSALTestSwizzle classMethod:@selector(startWebUIWithURL:context:completionBlock:)
-                           class:[MSALWebUI class]
+                           class:[MSALSafariWebUI class]
                            block:(id)^(id obj, NSURL *url, id<MSALRequestContext>context, MSALWebUICompletionBlock completionBlock)
      {
          (void)obj;

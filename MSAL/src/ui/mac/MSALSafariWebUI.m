@@ -17,7 +17,7 @@
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
@@ -25,51 +25,30 @@
 //
 //------------------------------------------------------------------------------
 
-#import "MSALTestCase.h"
-
-#import "MSALAuthority.h"
 #import "MSALSafariWebUI.h"
 
-#import "MSALTestBundle.h"
-#import "MSALTestCacheDataUtil.h"
-#import "MSALTestLogger.h"
-#import "MSALTestSwizzle.h"
+@implementation MSALSafariWebUI
 
-#if TARGET_OS_IPHONE
-#import "SFSafariViewController+TestOverrides.h"
-#import "MSALFakeViewController.h"
-#endif
-
-@implementation MSALTestCase
-
-- (void)setUp
++ (void)startWebUIWithURL:(NSURL *)url
+                  context:(id<MSALRequestContext>)context
+          completionBlock:(MSALWebUICompletionBlock)completionBlock
 {
-    [super setUp];
-    [[MSALTestLogger sharedLogger] reset];
-    [MSALTestBundle reset];
-    [MSALTestSwizzle reset];
-    [MSALAuthority initialize];
-    [[MSALTestCacheDataUtil defaultUtil] reset];
+    (void)url;
+    (void)context;
+    (void)completionBlock;
     
-#if TARGET_OS_IPHONE
-    [SFSafariViewController reset];
-    [MSALFakeViewController reset];
-#endif
+    @throw @"MSAL is not supported on macOS at this time.";
 }
 
-- (void)tearDown
++ (BOOL)handleResponse:(NSURL *)url
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    XCTAssertFalse([MSALSafariWebUI cancelCurrentWebAuthSession]);
-    [super tearDown];
+    (void)url;
+    @throw @"MSAL is not supported on macOS at this time.";
+}
+
++ (BOOL)cancelCurrentWebAuthSession
+{
+    return NO;
 }
 
 @end
-
-void wait_and_run_main_thread(dispatch_semaphore_t sem)
-{
-    while (dispatch_semaphore_wait(sem, DISPATCH_TIME_NOW))
-    {
-        [[NSRunLoop mainRunLoop] runMode:NSDefaultRunLoopMode beforeDate: [NSDate distantFuture]];
-    }
-}
