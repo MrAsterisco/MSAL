@@ -144,20 +144,22 @@ static MSALWebUI *s_currentWebSession = nil;
 				NSLog(@"%@", callbackURL);
 				NSLog(@"%@", error);
 			}];
+
+			[(SFAuthenticationSession*)_safariAuthenticationSession start];
 		} else {
 			_safariViewController = [[SFSafariViewController alloc] initWithURL:url
 														entersReaderIfAvailable:NO];
 			_safariViewController.delegate = self;
-		}
 
-        UIViewController *viewController = [UIApplication msalCurrentViewController];
-        if (!viewController)
-        {
-            [self clearCurrentWebSession];
-            ERROR_COMPLETION(_context, MSALErrorNoViewController, @"MSAL was unable to find the current view controller.");
-        }
-        
-        [viewController presentViewController:_safariViewController animated:YES completion:nil];
+			UIViewController *viewController = [UIApplication msalCurrentViewController];
+			if (!viewController)
+			{
+				[self clearCurrentWebSession];
+				ERROR_COMPLETION(_context, MSALErrorNoViewController, @"MSAL was unable to find the current view controller.");
+			}
+
+			[viewController presentViewController:_safariViewController animated:YES completion:nil];
+		}
         
         @synchronized (self)
         {
