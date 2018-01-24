@@ -44,6 +44,7 @@ static MSALWebUI *s_currentWebSession = nil;
 {
     NSURL *_url;
     SFSafariViewController *_safariViewController;
+	SFAuthenticationSession *_safariAuthenticationSession;
     MSALWebUICompletionBlock _completionBlock;
     id<MSALRequestContext> _context;
     NSString *_telemetryRequestId;
@@ -138,9 +139,18 @@ static MSALWebUI *s_currentWebSession = nil;
     [_telemetryEvent setIsCancelled:NO];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        _safariViewController = [[SFSafariViewController alloc] initWithURL:url
-                                  entersReaderIfAvailable:NO];
-        _safariViewController.delegate = self;
+		id controller;
+		if ([SFAuthenticationSession class]) {
+			_safariAuthenticationSession = [[SFAuthenticationSession alloc] initWithURL:url callbackURLScheme:"msal660e01b5-2336-478b-9a57-43c636a6b680" completionHandler:^(NSURL * _Nullable callbackURL, NSError * _Nullable error) {
+				NSLog(callbackURL)
+			}]
+		}
+		else {
+			_safariViewController = [[SFSafariViewController alloc] initWithURL:url
+														entersReaderIfAvailable:NO];
+			_safariViewController.delegate = self;
+		}
+
         UIViewController *viewController = [UIApplication msalCurrentViewController];
         if (!viewController)
         {
