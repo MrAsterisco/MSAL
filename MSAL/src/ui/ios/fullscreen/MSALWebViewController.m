@@ -78,14 +78,17 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 	(void)webView;
 	(void)navigation;
-	CATransition *animation = [CATransition animation];
-	[animation setDuration:0.6];
-	[animation setType:kCATransitionPush];
-	[animation setSubtype:kCATransitionFromRight];
-	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 
-	[_containerView.layer addAnimation:animation forKey:nil];
-	_containerView.hidden = NO;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		CATransition *animation = [CATransition animation];
+		[animation setDuration:0.6];
+		[animation setType:kCATransitionPush];
+		[animation setSubtype:kCATransitionFromRight];
+		[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+
+		[_containerView.layer addAnimation:animation forKey:nil];
+		_containerView.hidden = NO;
+	});
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
