@@ -26,7 +26,6 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 @implementation MSALFullscreenWebUI
 {
 	NSURL *_url;
-	UINavigationController *_navigationController;
 	MSALWebViewController *_controller;
 	MSALWebUICompletionBlock _completionBlock;
 	id<MSALRequestContext> _context;
@@ -123,14 +122,9 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 
 
 		viewController.definesPresentationContext = true;
+		_controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 
-		_navigationController = [[UINavigationController alloc] initWithRootViewController:_controller];
-		[_navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-		_navigationController.navigationBar.shadowImage = [UIImage new];
-		_navigationController.navigationBar.translucent = YES;
-		_navigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-
-		[viewController presentViewController:_navigationController animated:YES completion:nil];
+		[viewController presentViewController:_controller animated:YES completion:nil];
 
 		@synchronized (self)
 		{

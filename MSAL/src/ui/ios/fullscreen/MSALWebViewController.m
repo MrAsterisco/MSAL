@@ -34,7 +34,6 @@
 	self.view.backgroundColor = [UIColor clearColor];
 
 	_containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-	_containerView.backgroundColor = [UIColor blueColor];
 	_containerView.translatesAutoresizingMaskIntoConstraints = NO;
 	_containerView.hidden = YES;
 
