@@ -37,6 +37,9 @@
 	_containerView.translatesAutoresizingMaskIntoConstraints = NO;
 	_containerView.hidden = YES;
 
+	NSSet *websiteDataTypes = [NSSet setWithArray:@[WKWebsiteDataTypeCookies, WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]];
+	[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:[NSDate dateWithTimeIntervalSince1970: 0] completionHandler:^{ }];
+
 	WKWebViewConfiguration* configuration = [WKWebViewConfiguration new];
 	_webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration: configuration];
 	_webView.scrollView.delegate = self;
