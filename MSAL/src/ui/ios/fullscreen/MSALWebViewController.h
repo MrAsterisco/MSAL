@@ -16,6 +16,8 @@
 
 @property (nonatomic, weak, nullable) id <MSALWebViewControllerDelegate> delegate;
 
+@property (nonatomic, nullable) id<MSALRequestContext> parameters;
+
 @end
 
 @protocol MSALWebViewControllerDelegate <NSObject>

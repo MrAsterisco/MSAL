@@ -97,6 +97,15 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 	(void)webView;
 	NSLog(@"%@", navigationAction.request.URL);
+
+	NSURL *url = navigationAction.request.URL;
+	NSString *scheme = url.scheme;
+	if ([scheme containsString:@"msal"] && [UIApplication.sharedApplication canOpenURL:url]) {
+		[UIApplication.sharedApplication openURL:url];
+		decisionHandler(WKNavigationActionPolicyCancel);
+		return;
+	}
+
 	decisionHandler(WKNavigationActionPolicyAllow);
 }
 
