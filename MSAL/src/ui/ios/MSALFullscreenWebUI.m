@@ -121,7 +121,14 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 			ERROR_COMPLETION(_context, MSALErrorNoViewController, @"MSAL was unable to find the current view controller.");
 		}
 
+
+		viewController.definesPresentationContext = true;
+
 		_navigationController = [[UINavigationController alloc] initWithRootViewController:_controller];
+		[_navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+		_navigationController.navigationBar.shadowImage = [UIImage new];
+		_navigationController.navigationBar.translucent = YES;
+		_navigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 
 		[viewController presentViewController:_navigationController animated:YES completion:nil];
 
