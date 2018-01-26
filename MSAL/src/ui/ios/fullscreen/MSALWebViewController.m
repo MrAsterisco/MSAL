@@ -115,8 +115,16 @@
 	NSURL *url = navigationAction.request.URL;
 	NSString *scheme = url.scheme;
 	if ([scheme containsString:@"msal"] && [UIApplication.sharedApplication canOpenURL:url]) {
-		[UIApplication.sharedApplication openURL:url];
-		decisionHandler(WKNavigationActionPolicyCancel);
+		if ([url.absoluteString containsString:@"access_denied"]) {
+			if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:)]) {
+				[self.delegate webViewControllerDidFinish:self];
+			}
+		}
+		else {
+			[UIApplication.sharedApplication openURL:url];
+			decisionHandler(WKNavigationActionPolicyCancel);
+		}
+
 		return;
 	}
 
