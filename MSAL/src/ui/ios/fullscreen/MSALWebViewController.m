@@ -78,6 +78,20 @@
 	return nil;
 }
 
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+	(void)webView;
+	(void)navigation;
+
+	CATransition *animation = [CATransition animation];
+	[animation setDuration:0.6];
+	[animation setType:kCATransitionPush];
+	[animation setSubtype:kCATransitionFromLeft];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+
+	[_containerView.layer addAnimation:animation forKey:nil];
+	_containerView.hidden = YES;
+}
+
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 	(void)webView;
 	(void)navigation;
