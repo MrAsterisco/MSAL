@@ -85,7 +85,7 @@
 	CATransition *animation = [CATransition animation];
 	[animation setDuration:0.4];
 	[animation setType:kCATransitionPush];
-	[animation setSubtype:kCATransitionFromBottom];
+	[animation setSubtype:kCATransitionFromTop];
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 
 	[_containerView.layer addAnimation:animation forKey:nil];
@@ -100,7 +100,7 @@
 		CATransition *animation = [CATransition animation];
 		[animation setDuration:0.6];
 		[animation setType:kCATransitionPush];
-		[animation setSubtype:kCATransitionFromBottom];
+		[animation setSubtype:kCATransitionFromTop];
 		[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 
 		[_containerView.layer addAnimation:animation forKey:nil];
