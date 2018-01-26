@@ -123,6 +123,7 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 
 		viewController.definesPresentationContext = true;
 		_controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+		_controller.statusBarStyle = viewController.preferredStatusBarStyle;
 
 		[viewController presentViewController:_controller animated:YES completion:nil];
 

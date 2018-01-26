@@ -18,6 +18,8 @@
 
 @property (nonatomic, nullable) id<MSALRequestContext> parameters;
 
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
+
 @end
 
 @protocol MSALWebViewControllerDelegate <NSObject>

@@ -76,6 +76,10 @@
 	[_webView loadRequest:[NSURLRequest requestWithURL:self->_url]];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return self.statusBarStyle;
+}
+
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	(void)scrollView;
 	return nil;
