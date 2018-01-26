@@ -44,7 +44,10 @@
 	_webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration: configuration];
 	_webView.scrollView.delegate = self;
 	_webView.navigationDelegate = self;
+	_webView.allowsLinkPreview = false;
+	_webView.allowsBackForwardNavigationGestures = NO;
 	_webView.translatesAutoresizingMaskIntoConstraints = NO;
+
 
 	[_containerView addSubview:_webView];
 	[self.view addSubview:_containerView];
