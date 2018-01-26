@@ -36,7 +36,7 @@
 #import "MSALRequestParameters.h"
 #import "MSALUIBehavior_Internal.h"
 #import "MSALURLSession.h"
-#import "MSALWebUI.h"
+#import "MSALFullscreenWebUI.h"
 #import "MSALTelemetryApiId.h"
 #import "MSALTelemetry.h"
 
@@ -177,12 +177,12 @@
         return NO;
     }
     
-    return [MSALWebUI handleResponse:response];
+    return [MSALFullscreenWebUI handleResponse:response];
 }
 
 + (void)cancelCurrentWebAuthSession
 {
-    [MSALWebUI cancelCurrentWebAuthSession];
+    [MSALFullscreenWebUI cancelCurrentWebAuthSession];
 }
 
 #pragma mark -

@@ -34,7 +34,7 @@
 #import "MSALIdToken.h"
 #import "MSALClientInfo.h"
 #import "MSALTestConstants.h"
-#import "MSALWebUI.h"
+#import "MSALSafariWebUI.h"
 
 @interface MSALFakeInteractiveRequest : NSObject
 
@@ -156,7 +156,7 @@
      }];
     
     [MSALTestSwizzle classMethod:@selector(handleResponse:)
-                           class:[MSALWebUI class]
+                           class:[MSALSafariWebUI class]
                            block:(id)^BOOL(id obj, NSURL *url)
      {
          (void)obj;

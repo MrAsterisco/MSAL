@@ -27,7 +27,7 @@
 
 #import "MSALTestCase.h"
 #import "MSALTestLogger.h"
-#import "MSALWebUI.h"
+#import "MSALSafariWebUI.h"
 #import "UIApplication+MSALExtensions.h"
 #import "MSALFakeViewController.h"
 #import "SFSafariViewController+TestOverrides.h"
@@ -53,7 +53,7 @@
     [MSALFakeViewController returnNilForCurrentController];
     NSURL *testURL = [NSURL URLWithString:@"https://iamafakeurl.contoso.com/do/authy/things"];
     __block dispatch_semaphore_t dsem = dispatch_semaphore_create(0);
-    [MSALWebUI startWebUIWithURL:testURL
+    [MSALSafariWebUI startWebUIWithURL:testURL
                          context:nil
                  completionBlock:^(NSURL *response, NSError *error)
      {
@@ -78,7 +78,7 @@
     
     NSURL *testURL = [NSURL URLWithString:@"https://iamafakeurl.contoso.com/do/authy/things"];
     dispatch_semaphore_t dsem1 = dispatch_semaphore_create(0);
-    [MSALWebUI startWebUIWithURL:testURL
+    [MSALSafariWebUI startWebUIWithURL:testURL
                          context:nil
                  completionBlock:^(NSURL *response, NSError *error)
      {
@@ -90,7 +90,7 @@
      }];
     
     dispatch_semaphore_t dsem2 = dispatch_semaphore_create(0);
-    [MSALWebUI startWebUIWithURL:testURL
+    [MSALSafariWebUI startWebUIWithURL:testURL
                          context:nil
                  completionBlock:^(NSURL *response, NSError *error)
      {
@@ -103,7 +103,7 @@
     wait_and_run_main_thread(dsem2);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MSALWebUI handleResponse:[NSURL URLWithString:@"https://msal/?code=iamtotallyalegitresponsecode"]];
+        [MSALSafariWebUI handleResponse:[NSURL URLWithString:@"https://msal/?code=iamtotallyalegitresponsecode"]];
     });
     
     wait_and_run_main_thread(dsem1);
@@ -125,7 +125,7 @@
     
     NSURL *testURL = [NSURL URLWithString:@"https://iamafakeurl.contoso.com/do/authy/things"];
     __block dispatch_semaphore_t dsem = dispatch_semaphore_create(0);
-    [MSALWebUI startWebUIWithURL:testURL
+    [MSALSafariWebUI startWebUIWithURL:testURL
                          context:nil
                  completionBlock:^(NSURL *response, NSError *error)
      {
@@ -137,7 +137,7 @@
      }];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MSALWebUI cancelCurrentWebAuthSession];
+        [MSALSafariWebUI cancelCurrentWebAuthSession];
     });
     
     wait_and_run_main_thread(dsem);
@@ -159,7 +159,7 @@
     
     NSURL *testURL = [NSURL URLWithString:@"https://iamafakeurl.contoso.com/do/authy/things"];
     __block dispatch_semaphore_t dsem = dispatch_semaphore_create(0);
-    [MSALWebUI startWebUIWithURL:testURL
+    [MSALSafariWebUI startWebUIWithURL:testURL
                          context:nil
                  completionBlock:^(NSURL *response, NSError *error)
      {
@@ -185,7 +185,7 @@
 
 - (void)testNilResponse
 {
-    XCTAssertFalse([MSALWebUI handleResponse:nil]);
+    XCTAssertFalse([MSALSafariWebUI handleResponse:nil]);
     MSALTestLogger *logger = [MSALTestLogger sharedLogger];
     XCTAssertTrue([logger.lastMessage containsString:@"nil"]);
     XCTAssertEqual(logger.lastLevel, MSALLogLevelError);
@@ -193,7 +193,7 @@
 
 - (void)testNoCurrentSession
 {
-    XCTAssertFalse([MSALWebUI handleResponse:[NSURL URLWithString:@"https://iamafakeresponse.com"]]);
+    XCTAssertFalse([MSALSafariWebUI handleResponse:[NSURL URLWithString:@"https://iamafakeresponse.com"]]);
     MSALTestLogger *logger = [MSALTestLogger sharedLogger];
     XCTAssertTrue([logger.lastMessage containsString:@"session"]);
     XCTAssertEqual(logger.lastLevel, MSALLogLevelError);
@@ -211,7 +211,7 @@
     
     NSURL *testURL = [NSURL URLWithString:@"https://iamafakeurl.contoso.com/do/authy/things"];
     __block dispatch_semaphore_t dsem = dispatch_semaphore_create(0);
-    [MSALWebUI startWebUIWithURL:testURL
+    [MSALSafariWebUI startWebUIWithURL:testURL
                          context:nil
                  completionBlock:^(NSURL *response, NSError *error)
     {
@@ -223,7 +223,7 @@
     }];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MSALWebUI handleResponse:[NSURL URLWithString:@"https://msal/?code=iamtotallyalegitresponsecode"]];
+        [MSALSafariWebUI handleResponse:[NSURL URLWithString:@"https://msal/?code=iamtotallyalegitresponsecode"]];
     });
     
     wait_and_run_main_thread(dsem);
