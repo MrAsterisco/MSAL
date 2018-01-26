@@ -122,9 +122,9 @@
 		}
 		else {
 			[UIApplication.sharedApplication openURL:url];
-			decisionHandler(WKNavigationActionPolicyCancel);
 		}
 
+		decisionHandler(WKNavigationActionPolicyCancel);
 		return;
 	}
 
