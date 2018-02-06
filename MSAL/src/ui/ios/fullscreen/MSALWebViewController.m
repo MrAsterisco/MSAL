@@ -47,7 +47,7 @@
 	_webView.allowsLinkPreview = false;
 	_webView.allowsBackForwardNavigationGestures = NO;
 	_webView.translatesAutoresizingMaskIntoConstraints = NO;
-
+	_webView.scrollView.scrollEnabled = NO;
 
 	[_containerView addSubview:_webView];
 	[self.view addSubview:_containerView];
@@ -70,10 +70,14 @@
 	}
 }
 
+- (void)navigate {
+	[_webView loadRequest:[NSURLRequest requestWithURL:self->_url]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	[_webView loadRequest:[NSURLRequest requestWithURL:self->_url]];
+	[self navigate];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -126,6 +130,11 @@
 			if ([url.absoluteString containsString:@"access_denied"]) {
 				if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:withError:)]) {
 					[self.delegate webViewControllerDidFinish:self withError:[NSError errorWithDomain:MSALErrorDomain code:MSALErrorUserCanceled userInfo:nil]];
+				}
+			}
+			else if ([url.absoluteString containsString:@"reset"]) {
+				if ([self.delegate respondsToSelector:@selector(webViewControllerDidReceiveReset:)]) {
+					[self.delegate webViewControllerDidReceiveReset:self];
 				}
 			}
 			else {

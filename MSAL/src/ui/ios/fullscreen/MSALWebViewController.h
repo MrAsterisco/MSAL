@@ -20,10 +20,14 @@
 
 @property (nonatomic) UIStatusBarStyle statusBarStyle;
 
+- (void)navigate;
+
 @end
 
 @protocol MSALWebViewControllerDelegate <NSObject>
 
 - (void)webViewControllerDidFinish:(MSALWebViewController *_Nonnull)controller withError:(NSError *_Nullable)error;
+
+- (void)webViewControllerDidReceiveReset:(MSALWebViewController *_Nonnull)controller;
 
 @end

@@ -145,6 +145,10 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 	[self completeSessionWithResponse:nil orError:error];
 }
 
+- (void)webViewControllerDidReceiveReset:(MSALWebViewController *)controller {
+	[controller navigate];
+}
+
 + (BOOL)handleResponse:(NSURL *)url
 {
 	if (!url)
