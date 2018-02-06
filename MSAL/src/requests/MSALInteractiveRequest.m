@@ -199,6 +199,11 @@ static MSALInteractiveRequest *s_currentRequest = nil;
              // This error case *really* shouldn't occur. If we're seeing it it's almost certainly a developer bug
              ERROR_COMPLETION(_parameters, MSALErrorNoAuthorizationResponse, @"No authorization response received from server.");
          }
+
+		 if ([response.absoluteString containsString:"reset"]) {
+			 [self acquireTokenImpl:completionBlock];
+			 return;
+		 }
          
          NSDictionary *params = [NSDictionary msalURLFormDecode:response.query];
          CHECK_ERROR_COMPLETION(params, _parameters, MSALErrorBadAuthorizationResponse, @"Authorization response from the server code not be decoded.");
@@ -231,8 +236,6 @@ static MSALInteractiveRequest *s_currentRequest = nil;
          
          ERROR_COMPLETION(_parameters, MSALErrorBadAuthorizationResponse, @"No code or error in server response.");
      }];
-
-    
 }
 
 - (void)addAdditionalRequestParameters:(NSMutableDictionary<NSString *, NSString *> *)parameters
