@@ -134,7 +134,7 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 	});
 }
 
-- (void)webViewControllerDidFinish:(MSALWebViewController *)controller {
+- (void)webViewControllerDidFinish:(MSALWebViewController *)controller withError:(NSError * _Nullable)error {
 	(void)controller;
 	if (![self clearCurrentWebSession])
 	{
@@ -142,7 +142,7 @@ static MSALFullscreenWebUI *s_currentWebSession = nil;
 	}
 
 	[_telemetryEvent setIsCancelled:YES];
-	[self completeSessionWithResponse:nil orError:CREATE_LOG_ERROR(_context, MSALErrorUserCanceled, @"User cancelled the authorization session.")];
+	[self completeSessionWithResponse:nil orError:error];
 }
 
 + (BOOL)handleResponse:(NSURL *)url

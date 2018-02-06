@@ -127,9 +127,15 @@ typedef NS_ENUM(NSInteger, MSALErrorCode)
     
     /*!
         The user cancelled the web auth session by tapping the "Done" button on the
-        SFSafariViewController.
+        SFSafariViewController or the fullscreen UI has been closed because of a
+	 	redirect to a msal URI with an access denied error.
      */
     MSALErrorUserCanceled = -42400,
+
+	/*!
+	 The webpage attempted to redirect to a msal URI with a wrong Client ID.
+	 */
+	MSALErrorWrongClientId = -42404,
     /*!
         The authentication request was cancelled programmatically.
      */

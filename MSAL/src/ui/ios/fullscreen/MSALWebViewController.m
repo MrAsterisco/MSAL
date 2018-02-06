@@ -121,14 +121,21 @@
 
 	NSURL *url = navigationAction.request.URL;
 	NSString *scheme = url.scheme;
-	if ([scheme containsString:@"msal"] && [UIApplication.sharedApplication canOpenURL:url]) {
-		if ([url.absoluteString containsString:@"access_denied"]) {
-			if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:)]) {
-				[self.delegate webViewControllerDidFinish:self];
+	if ([scheme containsString:@"msal"]) {
+		if ([UIApplication.sharedApplication canOpenURL:url]) {
+			if ([url.absoluteString containsString:@"access_denied"]) {
+				if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:)]) {
+					[self.delegate webViewControllerDidFinish:self withError:[NSError errorWithDomain:MSALErrorDomain code:MSALErrorUserCanceled userInfo:nil]];
+				}
+			}
+			else {
+				[UIApplication.sharedApplication openURL:url];
 			}
 		}
 		else {
-			[UIApplication.sharedApplication openURL:url];
+			if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:)]) {
+				[self.delegate webViewControllerDidFinish:self withError:[NSError errorWithDomain:MSALErrorDomain code:MSALErrorWrongClientId userInfo:nil]];
+			}
 		}
 
 		decisionHandler(WKNavigationActionPolicyCancel);
