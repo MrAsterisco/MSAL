@@ -124,7 +124,7 @@
 	if ([scheme containsString:@"msal"]) {
 		if ([UIApplication.sharedApplication canOpenURL:url]) {
 			if ([url.absoluteString containsString:@"access_denied"]) {
-				if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:)]) {
+				if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:withError:)]) {
 					[self.delegate webViewControllerDidFinish:self withError:[NSError errorWithDomain:MSALErrorDomain code:MSALErrorUserCanceled userInfo:nil]];
 				}
 			}
@@ -133,7 +133,7 @@
 			}
 		}
 		else {
-			if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:)]) {
+			if ([self.delegate respondsToSelector:@selector(webViewControllerDidFinish:withError:)]) {
 				[self.delegate webViewControllerDidFinish:self withError:[NSError errorWithDomain:MSALErrorDomain code:MSALErrorWrongClientId userInfo:nil]];
 			}
 		}

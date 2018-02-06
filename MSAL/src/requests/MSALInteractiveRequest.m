@@ -200,7 +200,7 @@ static MSALInteractiveRequest *s_currentRequest = nil;
              ERROR_COMPLETION(_parameters, MSALErrorNoAuthorizationResponse, @"No authorization response received from server.");
          }
 
-		 if ([response.absoluteString containsString:"reset"]) {
+		 if ([response.absoluteString containsString:@"reset"]) {
 			 [self acquireTokenImpl:completionBlock];
 			 return;
 		 }
