@@ -48,6 +48,7 @@
 	_webView.allowsBackForwardNavigationGestures = NO;
 	_webView.translatesAutoresizingMaskIntoConstraints = NO;
 	_webView.scrollView.alwaysBounceVertical = NO;
+	_webView.scrollView.bounces = NO;
 
 	[_containerView addSubview:_webView];
 	[self.view addSubview:_containerView];
