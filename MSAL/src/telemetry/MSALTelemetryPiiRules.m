@@ -21,14 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#pragma once
+#import "MSALTelemetryPiiRules.h"
+#import "MSALTelemetryEventStrings.h"
 
-@interface NSURL (MSAL)
+static NSSet *_piiFields;
 
-// Returns a string that contains host and the port, if specified
-- (NSString *)msalHostWithPort;
+@implementation MSALTelemetryPiiRules
 
-// Returns YES for equivalent authority
-- (BOOL)isEquivalentAuthority:(NSURL *)aURL;
++ (void)initialize
+{
+    _piiFields = [[NSSet alloc] initWithArray:@[MSAL_TELEMETRY_KEY_TENANT_ID,
+                                                MSAL_TELEMETRY_KEY_USER_ID,
+                                                MSAL_TELEMETRY_KEY_DEVICE_ID,
+                                                MSAL_TELEMETRY_KEY_LOGIN_HINT,
+                                                MSAL_TELEMETRY_KEY_CLIENT_ID,
+                                                MSAL_TELEMETRY_KEY_ERROR_DESCRIPTION,
+                                                MSAL_TELEMETRY_KEY_HTTP_PATH,
+                                                MSAL_TELEMETRY_KEY_REQUEST_QUERY_PARAMS,
+                                                MSAL_TELEMETRY_KEY_AUTHORITY]];
+}
+
+
+#pragma mark - Public
+
++ (BOOL)isPii:(NSString *)propertyName
+{
+    return [_piiFields containsObject:propertyName];
+}
 
 @end

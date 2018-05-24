@@ -21,14 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#pragma once
+#import <Foundation/Foundation.h>
 
-@interface NSURL (MSAL)
+@interface MSALTelemetryPiiRules : NSObject
 
-// Returns a string that contains host and the port, if specified
-- (NSString *)msalHostWithPort;
-
-// Returns YES for equivalent authority
-- (BOOL)isEquivalentAuthority:(NSURL *)aURL;
++ (BOOL)isPii:(NSString *)propertyName;
 
 @end
