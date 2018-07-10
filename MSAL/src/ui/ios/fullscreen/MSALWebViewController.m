@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MSALWebViewController.h"
+#import "MSALFullscreenWebView.h"
 
 @interface MSALWebViewController () <WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate>
 
@@ -41,7 +42,7 @@
 	[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:[NSDate dateWithTimeIntervalSince1970: 0] completionHandler:^{ }];
 
 	WKWebViewConfiguration* configuration = [WKWebViewConfiguration new];
-	_webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration: configuration];
+	_webView = [[MSALFullscreenWebView alloc] initWithFrame:CGRectZero configuration: configuration];
 	_webView.scrollView.delegate = self;
 	_webView.navigationDelegate = self;
 	_webView.allowsLinkPreview = false;

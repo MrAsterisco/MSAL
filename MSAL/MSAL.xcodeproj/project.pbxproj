@@ -105,6 +105,8 @@
 		B27724271EAEC14000375C53 /* MSALAccessTokenCacheItem+TestAppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B27724251EAEC14000375C53 /* MSALAccessTokenCacheItem+TestAppUtil.m */; };
 		B2AD634A1EA5663800EFEEF1 /* MSALTestAppTelemetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD63491EA5663800EFEEF1 /* MSALTestAppTelemetryViewController.m */; };
 		B2AD634D1EA5665F00EFEEF1 /* MSALTestAppTelemetryDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD634C1EA5665F00EFEEF1 /* MSALTestAppTelemetryDispatcher.m */; };
+		C94D2651D252CEA29F34B09C /* MSALFullscreenWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = C94D262C39D572B0EB6098C4 /* MSALFullscreenWebView.m */; };
+		C94D269E89161E6DEB74B5F7 /* MSALFullscreenWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = C94D221A36826995BCEB77AE /* MSALFullscreenWebView.h */; };
 		CA7901A52018CD6A006803A7 /* MSALFullscreenWebUI.h in Headers */ = {isa = PBXBuildFile; fileRef = CA7901A32018CD6A006803A7 /* MSALFullscreenWebUI.h */; };
 		CA7901A62018CD6A006803A7 /* MSALFullscreenWebUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7901A42018CD6A006803A7 /* MSALFullscreenWebUI.m */; };
 		CA7901AA2018D1F4006803A7 /* MSALWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CA7901A82018D1F4006803A7 /* MSALWebViewController.h */; };
@@ -469,6 +471,8 @@
 		B2AD63491EA5663800EFEEF1 /* MSALTestAppTelemetryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSALTestAppTelemetryViewController.m; sourceTree = "<group>"; };
 		B2AD634B1EA5665F00EFEEF1 /* MSALTestAppTelemetryDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSALTestAppTelemetryDispatcher.h; sourceTree = "<group>"; };
 		B2AD634C1EA5665F00EFEEF1 /* MSALTestAppTelemetryDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSALTestAppTelemetryDispatcher.m; sourceTree = "<group>"; };
+		C94D221A36826995BCEB77AE /* MSALFullscreenWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSALFullscreenWebView.h; sourceTree = "<group>"; };
+		C94D262C39D572B0EB6098C4 /* MSALFullscreenWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSALFullscreenWebView.m; sourceTree = "<group>"; };
 		CA7901A32018CD6A006803A7 /* MSALFullscreenWebUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSALFullscreenWebUI.h; sourceTree = "<group>"; };
 		CA7901A42018CD6A006803A7 /* MSALFullscreenWebUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MSALFullscreenWebUI.m; sourceTree = "<group>"; };
 		CA7901A72018CD88006803A7 /* MSALWebUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MSALWebUI.h; sourceTree = "<group>"; };
@@ -736,14 +740,14 @@
 				96E62C261E6F740A00FC1CB2 /* MSALAdfsAuthorityResolver.m */,
 				96E62C2A1E6F741D00FC1CB2 /* MSALB2CAuthorityResolver.h */,
 				96E62C2B1E6F741D00FC1CB2 /* MSALB2CAuthorityResolver.m */,
-				964736EA1EC3EEA700A7428E /* MSALWebFingerLink.h */,
-				964736EB1EC3EEA700A7428E /* MSALWebFingerLink.m */,
-				964F65171EC4F6920017D685 /* MSALInstanceDiscoveryResponse.h */,
-				964F65181EC4F6920017D685 /* MSALInstanceDiscoveryResponse.m */,
+				964736EA1EC3EEA700A7428E,
+				964736EB1EC3EEA700A7428E,
+				964F65171EC4F6920017D685,
+				964F65181EC4F6920017D685,
 				967317D91E54C0E8004E6203 /* MSALTenantDiscoveryResponse.h */,
 				967317DA1E54C0E8004E6203 /* MSALTenantDiscoveryResponse.m */,
-				96F7FB051ECCDC2A00A7A0C1 /* MSALDrsDiscoveryResponse.h */,
-				96F7FB061ECCDC2A00A7A0C1 /* MSALDrsDiscoveryResponse.m */,
+				96F7FB051ECCDC2A00A7A0C1,
+				96F7FB061ECCDC2A00A7A0C1,
 				967317E31E552512004E6203 /* MSALInstanceDiscoveryResponse.h */,
 				967317E41E552512004E6203 /* MSALInstanceDiscoveryResponse.m */,
 			);
@@ -845,6 +849,8 @@
 			children = (
 				CA7901A82018D1F4006803A7 /* MSALWebViewController.h */,
 				CA7901A92018D1F4006803A7 /* MSALWebViewController.m */,
+				C94D262C39D572B0EB6098C4 /* MSALFullscreenWebView.m */,
+				C94D221A36826995BCEB77AE /* MSALFullscreenWebView.h */,
 			);
 			path = fullscreen;
 			sourceTree = "<group>";
@@ -1397,6 +1403,7 @@
 				D65A6FB11E3FF41D00C69FBA /* MSAL.h in Headers */,
 				D65A6FB31E3FF41D00C69FBA /* MSALLogger.h in Headers */,
 				23CDA9AD1FA3F44500FDD5C0 /* MSALTelemetryPiiRules.h in Headers */,
+				C94D269E89161E6DEB74B5F7 /* MSALFullscreenWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1813,8 +1820,8 @@
 				D61BD2D71EBD0A1B0007E484 /* MSALTokenCacheKeyBase.m in Sources */,
 				D61BD2D61EBD0A1B0007E484 /* MSALAccessTokenCacheItem.m in Sources */,
 				D61BD2C31EBD0A080007E484 /* MSALOAuth2Response.m in Sources */,
-				96F7FB0F1ECCDC2A00A7A0C1 /* MSALWebFingerResponse.m in Sources */,
-				96F7FB0B1ECCDC2A00A7A0C1 /* MSALDrsDiscoveryResponse.m in Sources */,
+				96F7FB0F1ECCDC2A00A7A0C1,
+				96F7FB0B1ECCDC2A00A7A0C1,
 				D61BD2CD1EBD0A0F0007E484 /* MSALB2CAuthorityResolver.m in Sources */,
 				D61BD2CF1EBD0A0F0007E484 /* MSALInstanceDiscoveryResponse.m in Sources */,
 				D61BD2AB1EBD09F90007E484 /* MSALOAuth2Constants.m in Sources */,
@@ -1858,6 +1865,7 @@
 				D61BD2B31EBD09F90007E484 /* MSALUIBehavior.m in Sources */,
 				CA7901AB2018D1F4006803A7 /* MSALWebViewController.m in Sources */,
 				D61BD2C51EBD0A080007E484 /* MSALTokenResponse.m in Sources */,
+				C94D2651D252CEA29F34B09C /* MSALFullscreenWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2005,7 +2013,7 @@
 				6030A24B1E930C06008B838D /* MSALClientInfoTests.m in Sources */,
 				D61F5BDC1E59694300912CB8 /* NSDictionary+MSALTestUtil.m in Sources */,
 				603D19A21EA6BD1800462A58 /* MSALTestTokenCacheItemUtil.m in Sources */,
-				964F64F01EC4E7B30017D685 /* MSALAdfsAuthorityResolverTests.m in Sources */,
+				964F64F01EC4E7B30017D685,
 				2364C74C1FB3E5CC00835428 /* XCTestCase+HelperMethods.m in Sources */,
 				D69ADB201E5151E000952049 /* MSALJsonObjectTests.m in Sources */,
 			);
